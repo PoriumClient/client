@@ -39,6 +39,9 @@
     <ClCompile Include="Sauce\Module\ModuleMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sauce\Porium.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sauce\Hooks\Hooks.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sauce\Module\ModuleMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sauce\Vendor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

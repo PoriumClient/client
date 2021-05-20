@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Sauce\Module\ModuleMgr.cpp" />
+    <ClCompile Include="Sauce\Porium.cpp" />
     <ClCompile Include="Sauce\Renderer\PoriumRenderer.cpp" />
     <ClCompile Include="Sauce\Module\Mods\Fullbright.cpp" />
     <ClCompile Include="Sauce\Module\Module.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Sauce\SDK\MinecraftUIRenderContext.h" />
     <ClInclude Include="Sauce\SDK\Pointers.h" />
     <ClInclude Include="Sauce\Util\Utils.h" />
+    <ClInclude Include="Sauce\Vendor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
