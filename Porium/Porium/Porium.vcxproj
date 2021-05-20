@@ -151,7 +151,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sauce\Module\ModuleMgr.cpp" />
+    <ClCompile Include="Sauce\Renderer\PoriumRenderer.cpp" />
+    <ClCompile Include="Sauce\Module\Mods\Fullbright.cpp" />
+    <ClCompile Include="Sauce\Module\Module.cpp" />
+    <ClCompile Include="Sauce\Logger\Logger.cpp" />
+    <ClCompile Include="Sauce\Hooks\Hooks.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sauce\Util\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sauce\Module\ModuleMgr.h" />
+    <ClInclude Include="Sauce\Renderer\PoriumRenderer.h" />
+    <ClInclude Include="Sauce\Module\Mods\Fullbright.h" />
+    <ClInclude Include="Sauce\Module\Module.h" />
+    <ClInclude Include="Sauce\Logger\Logger.h" />
+    <ClInclude Include="Sauce\Hooks\Hooks.h" />
+    <ClInclude Include="Sauce\Porium.h" />
+    <ClInclude Include="Sauce\SDK\MinecraftUIRenderContext.h" />
+    <ClInclude Include="Sauce\SDK\Pointers.h" />
+    <ClInclude Include="Sauce\Util\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
