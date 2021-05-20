@@ -1,3 +1,5 @@
 #pragma once
-#include "Module/Module.h"
-#include "SDK/Pointers.h"
+
+#include <vector>
+#include <string>
+#include <memory>

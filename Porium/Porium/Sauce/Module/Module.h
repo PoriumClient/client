@@ -1,4 +1,5 @@
 #pragma once
+#include "../SDK/Pointers.h"
 class Module
 {
 public:
