@@ -1,7 +1,7 @@
 #include "ModuleMgr.h"
 
 std::vector<Module*> Modules = std::vector<Module*>();
-std::vector<std::string> Categories = std::vector < std::string > ();
+std::vector<std::string> Categories;
 
 
 std::vector<Module*> ModuleMgr::getModules() {
@@ -13,7 +13,11 @@ std::vector<std::string> ModuleMgr::getCategories() {
 }
 
 void ModuleMgr::initMods() {
-	this->modList.push_back(std::shared_ptr<Module>(new Fullbright()));
+	Modules.push_back(new Fullbright());
 
-	init = true;
+	for (UINT32 i = 0; i < Modules.size(); i++) {
+		if (find(Categories.begin(), Categories.end(), Modules[i]->category) == Categories.end()) {
+			Categories.push_back(Modules[i]->category);
+		}
+	}
 }

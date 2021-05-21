@@ -1,8 +1,8 @@
 #include <Windows.h>
 #include "Sauce/Porium.h"
-
+#include "Sauce/Module/ModuleMgr.h"
 void Porium() {
-    
+    ModuleMgr::initMods();
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule,

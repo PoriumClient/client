@@ -11,7 +11,9 @@ public:
 	static std::vector<Module*> getModules();
 	static std::vector<std::string> getCategories();
 
-	void initMods();
+	static void initMods();
+	static void freeMods();
+
 	void tickMods();
 
 	void tickOnRender();
