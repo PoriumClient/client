@@ -56,9 +56,6 @@
     <ClInclude Include="Sauce\Module\Mods\Fullbright.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sauce\SDK\MinecraftUIRenderContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sauce\Util\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>

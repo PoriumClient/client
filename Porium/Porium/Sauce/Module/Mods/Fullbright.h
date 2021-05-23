@@ -1,9 +1,9 @@
 #pragma once
-#include "../../Vendor.h"
 #include "../Module.h"
-#include "../../SDK/Pointers.h"	
+#include "../../Vendor.h"
 
-class Fullbright : public Module 
+
+class Fullbright : public Module
 {
 public:
 	Fullbright();

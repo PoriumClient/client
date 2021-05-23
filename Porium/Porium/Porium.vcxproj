@@ -120,7 +120,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;PORIUM_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;PORIUM_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -170,7 +170,6 @@
     <ClInclude Include="Sauce\Logger\Logger.h" />
     <ClInclude Include="Sauce\Hooks\Hooks.h" />
     <ClInclude Include="Sauce\Porium.h" />
-    <ClInclude Include="Sauce\SDK\MinecraftUIRenderContext.h" />
     <ClInclude Include="Sauce\SDK\Pointers.h" />
     <ClInclude Include="Sauce\Util\Utils.h" />
     <ClInclude Include="Sauce\Vendor.h" />

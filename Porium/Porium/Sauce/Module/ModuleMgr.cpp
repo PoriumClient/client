@@ -21,3 +21,9 @@ void ModuleMgr::initMods() {
 		}
 	}
 }
+
+void ModuleMgr::tickMods() {
+	for (UINT i = 0; i < Modules.size(); i++) {
+		Modules[i]->onLoop();
+	}
+}
