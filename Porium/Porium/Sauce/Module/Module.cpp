@@ -7,15 +7,8 @@ Module::Module(std::string name, std::string category, UINT64 keybind) {
 	this->keybind = keybind;
 }
 
-void Module::onEnable() {
-
-}
-
-void Module::onDisable() {
-
-}
-
-void Module::onLoop() {
+void Module::onBaseTick() {
+	onLoop();
 	if (wasToggled != toggled) {
 		if (toggled) {
 			onEnable();
@@ -28,9 +21,19 @@ void Module::onLoop() {
 	if (toggled) {
 		onTick();
 	}
-	if (Hooks::KeyState(keybind)) {
-		toggled = !toggled;
-		Sleep(10);
-	}
 }
 
+void Module::setToggled(bool toggled) {
+	if (toggled == this->toggled) return;
+
+	this->toggled = toggled;
+
+	if (toggled)
+		onEnable();
+	else
+		onDisable();
+}
+
+void Module::toggle() {
+	setToggled(!this->toggled);
+}

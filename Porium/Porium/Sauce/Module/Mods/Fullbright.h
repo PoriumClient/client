@@ -9,5 +9,6 @@ public:
 	Fullbright();
 	void onEnable() override;
 	void onDisable() override;
+	void onLoop() override;
 };
 

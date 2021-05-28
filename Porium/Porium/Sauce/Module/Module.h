@@ -10,12 +10,15 @@ public:
 	UINT64 keybind;
 	std::string name;
 	std::string category;
-	virtual void onLoop();
 	bool toggled = false;
 	bool wasToggled = false;
-	virtual void onEnable();
-	virtual void onDisable();
+	virtual void onLoop() {}
+	virtual void onEnable() {}
+	virtual void onDisable() {}
 	virtual void onTick() {}
-
+	virtual void onBaseTick();
+	virtual void onKeyUpdate(int key) {}
+	virtual void setToggled(bool toggled);
+	virtual void toggle();
 };
 

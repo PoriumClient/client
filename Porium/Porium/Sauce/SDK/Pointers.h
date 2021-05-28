@@ -3,6 +3,7 @@
 
 namespace Pointers {
 	static inline float* Brightness;
+
 };
 
 

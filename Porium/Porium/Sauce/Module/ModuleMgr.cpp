@@ -22,8 +22,19 @@ void ModuleMgr::initMods() {
 	}
 }
 
+void ModuleMgr::KeyHandler(ULONG key) {
+	for (UINT i = 0; i < Modules.size(); i++) {
+		if (Modules[i]->keybind == key) {
+			Modules[i]->toggled = !Modules[i]->toggled;
+		}
+	}
+	for (UINT i = 0; i < Modules.size(); i++) {
+		Modules[i]->onKeyUpdate(key);
+	}
+}
+
 void ModuleMgr::tickMods() {
 	for (UINT i = 0; i < Modules.size(); i++) {
-		Modules[i]->onLoop();
+		Modules[i]->onBaseTick();
 	}
 }
