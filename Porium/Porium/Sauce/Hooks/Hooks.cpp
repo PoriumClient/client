@@ -7,7 +7,7 @@ std::map<UINT64, bool> keyState;
 
 bool Hooks::KeyState(UINT64 key) {return keyState[key];}
 
-void Hooks::KeyPressed(UINT64 key) { keyState[key] = true; ModuleMgr::KeyHandler(key); Logger::log("keypress: " + key); }
+void Hooks::KeyPressed(UINT64 key) { keyState[key] = true; ModuleMgr::KeyHandler(key); }
 
 void Hooks::KeyReleased(UINT64 key) {keyState[key] = false;}
 
@@ -37,4 +37,8 @@ DWORD __fastcall Hooks::HookKeys(){
 			Logger::log("Failed to create KeyHook");
 		}
     return 0;
+}
+
+void Hooks::UninstallHooks() {
+	MH_DisableHook(MH_ALL_HOOKS);
 }

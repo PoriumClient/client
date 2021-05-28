@@ -1,7 +1,10 @@
 #pragma once
 #include "../Vendor.h"
 #include "Module.h"
-#include "Mods/Fullbright.h"
+
+#include "Mods/Graphics/Fullbright.h"
+#include "Mods/Dev/Uninject.h"
+
 #include "../Hooks/Hooks.h"
 
 class ModuleMgr {

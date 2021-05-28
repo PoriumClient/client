@@ -10,12 +10,7 @@ Module::Module(std::string name, std::string category, UINT64 keybind) {
 void Module::onBaseTick() {
 	onLoop();
 	if (wasToggled != toggled) {
-		if (toggled) {
-			onEnable();
-		}
-		else {
-			onDisable();
-		}
+		if (toggled) { onEnable(); } else { onDisable(); }
 		wasToggled = toggled;
 	}
 	if (toggled) {
@@ -23,17 +18,5 @@ void Module::onBaseTick() {
 	}
 }
 
-void Module::setToggled(bool toggled) {
-	if (toggled == this->toggled) return;
 
-	this->toggled = toggled;
 
-	if (toggled)
-		onEnable();
-	else
-		onDisable();
-}
-
-void Module::toggle() {
-	setToggled(!this->toggled);
-}

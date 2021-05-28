@@ -1,6 +1,6 @@
 #pragma once
-#include "../Module.h"
-#include "../../Vendor.h"
+#include "../../Module.h"
+#include "../../../Vendor.h"
 
 
 class Fullbright : public Module

@@ -14,5 +14,6 @@ public:
 	static void KeyReleased(UINT64 key);
 	static bool KeyState(UINT64 key);
 	static void HookRenderer();
+	static void UninstallHooks();
 };
 

@@ -18,7 +18,5 @@ public:
 	virtual void onTick() {}
 	virtual void onBaseTick();
 	virtual void onKeyUpdate(int key) {}
-	virtual void setToggled(bool toggled);
-	virtual void toggle();
 };
 

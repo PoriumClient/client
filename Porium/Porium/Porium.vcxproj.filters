@@ -27,9 +27,6 @@
     <ClCompile Include="Sauce\Module\Module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sauce\Module\Mods\Fullbright.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sauce\Util\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,6 +39,12 @@
     <ClCompile Include="Sauce\Porium.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sauce\Module\Mods\Dev\Uninject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sauce\Module\Mods\Graphics\Fullbright.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sauce\Hooks\Hooks.h">
@@ -51,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sauce\Module\Module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sauce\Module\Mods\Fullbright.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sauce\Util\Utils.h">
@@ -72,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sauce\Vendor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sauce\Module\Mods\Dev\Uninject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sauce\Module\Mods\Graphics\Fullbright.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

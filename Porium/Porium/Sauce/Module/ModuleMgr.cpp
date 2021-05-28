@@ -14,6 +14,7 @@ std::vector<std::string> ModuleMgr::getCategories() {
 
 void ModuleMgr::initMods() {
 	Modules.push_back(new Fullbright());
+	Modules.push_back(new Uninject());
 
 	for (UINT32 i = 0; i < Modules.size(); i++) {
 		if (find(Categories.begin(), Categories.end(), Modules[i]->category) == Categories.end()) {

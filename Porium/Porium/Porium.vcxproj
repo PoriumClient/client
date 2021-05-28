@@ -155,17 +155,18 @@
     <ClCompile Include="Sauce\Module\ModuleMgr.cpp" />
     <ClCompile Include="Sauce\Porium.cpp" />
     <ClCompile Include="Sauce\Renderer\PoriumRenderer.cpp" />
-    <ClCompile Include="Sauce\Module\Mods\Fullbright.cpp" />
+    <ClCompile Include="Sauce\Module\Mods\Graphics\Fullbright.cpp" />
     <ClCompile Include="Sauce\Module\Module.cpp" />
     <ClCompile Include="Sauce\Logger\Logger.cpp" />
     <ClCompile Include="Sauce\Hooks\Hooks.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sauce\Util\Utils.cpp" />
+    <ClCompile Include="Sauce\Module\Mods\Dev\Uninject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sauce\Module\ModuleMgr.h" />
     <ClInclude Include="Sauce\Renderer\PoriumRenderer.h" />
-    <ClInclude Include="Sauce\Module\Mods\Fullbright.h" />
+    <ClInclude Include="Sauce\Module\Mods\Graphics\Fullbright.h" />
     <ClInclude Include="Sauce\Module\Module.h" />
     <ClInclude Include="Sauce\Logger\Logger.h" />
     <ClInclude Include="Sauce\Hooks\Hooks.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Sauce\SDK\Pointers.h" />
     <ClInclude Include="Sauce\Util\Utils.h" />
     <ClInclude Include="Sauce\Vendor.h" />
+    <ClInclude Include="Sauce\Module\Mods\Dev\Uninject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
