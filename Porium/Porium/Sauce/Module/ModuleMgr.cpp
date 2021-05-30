@@ -19,6 +19,7 @@ void ModuleMgr::initMods() {
 	for (UINT32 i = 0; i < Modules.size(); i++) {
 		if (find(Categories.begin(), Categories.end(), Modules[i]->category) == Categories.end()) {
 			Categories.push_back(Modules[i]->category);
+			Modules[i]->toggled = false;
 		}
 	}
 }

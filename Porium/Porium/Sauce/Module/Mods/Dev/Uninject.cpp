@@ -6,5 +6,5 @@ Uninject::Uninject() : Module::Module("Uninject", "Dev", 0x55) {
 
 void Uninject::onEnable() {
 	Hooks::UninstallHooks();
-	FreeLibraryAndExitThread((HMODULE)NULL, 0);
+	FreeLibraryAndExitThread((HMODULE)Porium::thisModule(), 0);
 }

@@ -15,5 +15,8 @@ public:
         return addr;
     }
     static uintptr_t moduleBase;
+    static ULONG thisModule() {
+        return (ULONG)GetModuleHandleA("Porium.dll");
+    }
 };
 
