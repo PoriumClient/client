@@ -1,6 +1,5 @@
 #include "Logger.h"
 
-
 std::string loggingPath = std::string(getenv("APPDATA") + std::string("\\..\\Local\\Packages\\Microsoft.MinecraftUWP_8wekyb3d8bbwe\\RoamingState\\\Porium.txt"));
 
 void Logger::log(std::string log) {
@@ -15,10 +14,8 @@ void Logger::log(std::string log) {
 }
 
 void Logger::logStr(std::string str, UINT64 num) {
-
 	std::stringstream strm;
 	strm << str << ": " << std::hex << num;
 	std::string result = strm.str();
 	log(result);
-
 }

@@ -4,6 +4,4 @@
 class PoriumRenderer
 {
 public:
-
 };
-

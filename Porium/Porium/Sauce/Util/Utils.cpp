@@ -60,7 +60,6 @@ bool Utils::fileExists(const std::string& filePath) {
 	return (stat(filePath.c_str(), &buffer) == 0);
 }
 
-
 uintptr_t Utils::FindSignatureModule(const char* szModule, const char* szSignature)
 {
 	const char* pattern = szSignature;
@@ -156,5 +155,3 @@ std::string Utils::strToLower(std::string inputStr) {
 
 	return returnString;
 }
-
-

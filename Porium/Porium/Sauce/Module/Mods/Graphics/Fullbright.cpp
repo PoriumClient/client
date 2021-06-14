@@ -1,7 +1,6 @@
 #include "Fullbright.h"
 
 Fullbright::Fullbright() : Module::Module("Fullbright", "Graphics", 0x46) {
-
 }
 
 void Fullbright::onEnable() {

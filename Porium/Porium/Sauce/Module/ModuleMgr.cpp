@@ -3,7 +3,6 @@
 std::vector<Module*> Modules = std::vector<Module*>();
 std::vector<std::string> Categories;
 
-
 std::vector<Module*> ModuleMgr::getModules() {
 	return Modules;
 }

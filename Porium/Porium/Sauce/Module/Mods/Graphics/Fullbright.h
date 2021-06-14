@@ -2,7 +2,6 @@
 #include "../../Module.h"
 #include "../../../Vendor.h"
 
-
 class Fullbright : public Module
 {
 public:
@@ -11,4 +10,3 @@ public:
 	void onDisable() override;
 	void onLoop() override;
 };
-

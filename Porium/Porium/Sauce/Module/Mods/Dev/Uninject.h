@@ -9,4 +9,3 @@ public:
 	Uninject();
 	void onEnable() override;
 };
-

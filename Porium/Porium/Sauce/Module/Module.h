@@ -2,7 +2,6 @@
 #include "../SDK/Pointers.h"
 #include "../Vendor.h"
 
-
 class Module
 {
 public:
@@ -19,4 +18,3 @@ public:
 	virtual void onBaseTick();
 	virtual void onKeyUpdate(int key) {}
 };
-

@@ -27,7 +27,6 @@ static constexpr float DEG_RAD2 = PI / 360.0f;
 static constexpr float DEG_RAD = 180.0f / PI;
 static constexpr float RAD_DEG = PI / 180.f;
 
-
 static const char* const KeyNames[] = {
 	"Unknown",
 	"VK_LBUTTON",
@@ -328,7 +327,6 @@ struct Vector3 {
 	Vector3 normalize() {
 		return div(magnitude());
 	};
-
 };
 
 struct Vector3i {
@@ -379,12 +377,9 @@ struct Color : Vector4 {
 class Utils {
 public:
 
-
-
 	static std::string strToLower(std::string inputStr);
 	static bool fileExists(const std::string& filePath);
 	static bool stringIntToBool(std::string str);
-
 
 	static uintptr_t FindSignatureModule(const char* szModule, const char* szSignature);
 	static void Patch(BYTE* dst, BYTE* src, unsigned int size);
@@ -402,4 +397,3 @@ public:
 };
 
 /* View Matrix BS */
-
