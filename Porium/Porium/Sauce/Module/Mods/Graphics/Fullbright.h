@@ -2,6 +2,7 @@
 #include "../../Module.h"
 #include "../../../Vendor.h"
 
+
 class Fullbright : public Module
 {
 public:

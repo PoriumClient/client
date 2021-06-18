@@ -1,16 +1,16 @@
 #include "Fullbright.h"
+#include "../../../SDK/Pointers.h"
+
 
 Fullbright::Fullbright() : Module::Module("Fullbright", "Graphics", 0x46) {
 }
 
 void Fullbright::onEnable() {
-	auto d = (float*)Porium::GetPointerAddress(Porium::moduleBase + 0x03F57C28, { 0x18, 0x150, 0x18 });
-	*d = 1000;
+	Memory::Internal::write<float>(Pointers::Brightness, 1000);
 }
 
 void Fullbright::onLoop() {}
 
 void Fullbright::onDisable() {
-	auto d = (float*)Porium::GetPointerAddress(Porium::moduleBase + 0x03F57C28, { 0x18, 0x150, 0x18 });
-	*d = 1;
+	Memory::Internal::write<float>(Pointers::Brightness, 1);
 }

@@ -1,5 +1,4 @@
 #pragma once
-#include "../SDK/Pointers.h"
 #include "../Vendor.h"
 
 class Module
