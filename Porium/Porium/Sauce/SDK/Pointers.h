@@ -11,4 +11,4 @@ public:
 
 Address Pointers::clientAddr = Memory::Internal::getModule("Minecraft.Windows.exe");
 
-Address Pointers::Brightness = Memory::Internal::getAddress(clientAddr + 0x03F57C28, { 0x18, 0x150, 0x18 });
+Address Pointers::Brightness = Memory::Internal::getAddress(clientAddr + 0x03F594F8, { 0x10, 0xFC8, 0x8, 0xF8, 0x170, 0x140, 0x18 });
