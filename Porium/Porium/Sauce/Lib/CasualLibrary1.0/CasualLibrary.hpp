@@ -29,24 +29,25 @@
 #endif
 
 namespace Helper {
-	[[nodiscard]] bool matchingBuilt(const HANDLE process) noexcept;
+    [[nodiscard]] bool matchingBuilt(const HANDLE process) noexcept;
 }
 
-class Address
-{
+class Address {
 public:
     Address() noexcept = default;
-    Address(const uintptr_t _ptr) noexcept : ptr(_ptr) {};
-    Address(const void* _ptr) noexcept : ptr(reinterpret_cast<uintptr_t> (_ptr)) {};
+
+    Address(const uintptr_t _ptr) noexcept: ptr(_ptr) {};
+
+    Address(const void *_ptr) noexcept: ptr(reinterpret_cast<uintptr_t> (_ptr)) {};
 
     operator uintptr_t(void) const noexcept;
-    explicit operator void* (void) const noexcept;
+
+    explicit operator void *(void) const noexcept;
 
     bool isValid(void) const noexcept;
 
-    template <typename T = uintptr_t>
-    T get(void) const noexcept
-    {
+    template<typename T = uintptr_t>
+    T get(void) const noexcept {
         return static_cast<T>(ptr);
     }
 
@@ -57,31 +58,36 @@ protected:
 };
 
 namespace Memory {
-	[[nodiscard]] std::vector<int> patternToBytes(const char* pattern) noexcept;
-	[[nodiscard]] std::string getLastErrorAsString(void) noexcept;
-    [[nodiscard]] std::string convertToString(char* a, int size) noexcept;
+    [[nodiscard]] std::vector<int> patternToBytes(const char *pattern) noexcept;
+
+    [[nodiscard]] std::string getLastErrorAsString(void) noexcept;
+
+    [[nodiscard]] std::string convertToString(char *a, int size) noexcept;
 
     // Sadly, only C++17 feature because of the folding
 #ifdef CPP17GRT
+
     template<typename T, typename... Ts>
     [[nodiscard]] constexpr bool is_any_type(void) noexcept {
         return (std::is_same_v<T, Ts> || ...);
     }
+
 #endif
 }
 
 namespace Memory {
-    class External final
-    {
+    class External final {
     public:
         External(void) noexcept = default;
-        External(const char* proc, bool debug = false) noexcept;
+
+        External(const char *proc, bool debug = false) noexcept;
+
         ~External(void) noexcept;
 
         /*
         @brief uses loadlibrary from kernal32 to inject a dll into another process
         */
-        bool DLLInject(const std::string& DllPath) {
+        bool DLLInject(const std::string &DllPath) {
             char szDllPath[MAX_PATH];
             GetCurrentDirectoryA(MAX_PATH, szDllPath);
             strcat_s(szDllPath, DllPath.c_str());
@@ -92,14 +98,20 @@ namespace Memory {
             if (!pLoadLibrary)
                 return false;
 
-            auto pAllocAddress = reinterpret_cast<std::uintptr_t>(VirtualAllocEx(m_hProcessHandle, 0, strlen(szDllPath) + 1, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE));
+            auto pAllocAddress = reinterpret_cast<std::uintptr_t>(VirtualAllocEx(m_hProcessHandle, 0,
+                                                                                 strlen(szDllPath) + 1,
+                                                                                 MEM_RESERVE | MEM_COMMIT,
+                                                                                 PAGE_READWRITE));
             if (!pAllocAddress)
                 return false;
 
-            if (!WriteProcessMemory(m_hProcessHandle, reinterpret_cast<PVOID>(pAllocAddress), szDllPath, strlen(szDllPath) + 1, 0))
+            if (!WriteProcessMemory(m_hProcessHandle, reinterpret_cast<PVOID>(pAllocAddress), szDllPath,
+                                    strlen(szDllPath) + 1, 0))
                 return false;
 
-            auto hThread = CreateRemoteThread(m_hProcessHandle, 0, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(pLoadLibrary), reinterpret_cast<LPVOID>(pAllocAddress), 0, 0);
+            auto hThread = CreateRemoteThread(m_hProcessHandle, 0, 0,
+                                              reinterpret_cast<LPTHREAD_START_ROUTINE>(pLoadLibrary),
+                                              reinterpret_cast<LPVOID>(pAllocAddress), 0, 0);
             if (hThread == INVALID_HANDLE_VALUE)
                 return false;
 
@@ -108,13 +120,14 @@ namespace Memory {
 
             return true;
         }
+
         /**
         @brief reads a value from memory, supports strings in C++17 or greater.
         @param addToBeRead address from which the value will be read.
         @param memoryCheck flag if true memory protection will be checked/changed before reading.
         */
-        template <typename T>
-        [[nodiscard]] T read(const Address& addToBeRead, const bool memoryCheck = false) noexcept {
+        template<typename T>
+        [[nodiscard]] T read(const Address &addToBeRead, const bool memoryCheck = false) noexcept {
             const uintptr_t address = addToBeRead.get();
 
             if (memoryCheck) {
@@ -131,10 +144,11 @@ namespace Memory {
                     }
 
 #ifdef CPP17GRT
-                    if constexpr (is_any_type<T, const char*, std::string, char*>()) {
+                    if constexpr (is_any_type<T, const char *, std::string, char *>()) {
                         constexpr const std::size_t size = 200;
                         std::vector<char> chars(size);
-                        if (!ReadProcessMemory(handle, reinterpret_cast<LPBYTE*>(address), chars.data(), size, NULL) && debug)
+                        if (!ReadProcessMemory(handle, reinterpret_cast<LPBYTE *>(address), chars.data(), size, NULL) &&
+                            debug)
                             std::cout << getLastErrorAsString() << std::endl;
 
                         const std::string name(chars.begin(), chars.end());
@@ -146,7 +160,7 @@ namespace Memory {
 #endif
 
                     T varBuff;
-                    ReadProcessMemory(handle, reinterpret_cast<LPBYTE*>(address), &varBuff, sizeof(varBuff), nullptr);
+                    ReadProcessMemory(handle, reinterpret_cast<LPBYTE *>(address), &varBuff, sizeof(varBuff), nullptr);
 
                     DWORD dwOldProtect;
                     VirtualProtectEx(handle, mbi.BaseAddress, mbi.RegionSize, mbi.Protect, &dwOldProtect);
@@ -156,10 +170,10 @@ namespace Memory {
             }
 
 #ifdef CPP17GRT
-            if constexpr (is_any_type<T, const char*, std::string, char*>()) {
+            if constexpr (is_any_type<T, const char *, std::string, char *>()) {
                 constexpr const std::size_t size = 200;
                 std::vector<char> chars(size);
-                if (!ReadProcessMemory(handle, reinterpret_cast<LPBYTE*>(address), chars.data(), size, NULL) && debug)
+                if (!ReadProcessMemory(handle, reinterpret_cast<LPBYTE *>(address), chars.data(), size, NULL) && debug)
                     std::cout << getLastErrorAsString() << std::endl;
 
                 const std::string name(chars.begin(), chars.end());
@@ -169,7 +183,7 @@ namespace Memory {
 #endif
 
             T varBuff;
-            ReadProcessMemory(handle, reinterpret_cast<LPBYTE*>(address), &varBuff, sizeof(varBuff), nullptr);
+            ReadProcessMemory(handle, reinterpret_cast<LPBYTE *>(address), &varBuff, sizeof(varBuff), nullptr);
             return varBuff;
         }
 
@@ -179,7 +193,7 @@ namespace Memory {
         @param valToWrite the value that gets written to desired address.
         @param memoryCheck flag if true memory protection will be checked/changed before writing.
         */
-        template <typename T>
+        template<typename T>
         T write(const uintptr_t addToWrite, const T valToWrite, const bool memoryCheck = false) noexcept {
             if (memoryCheck) {
                 MEMORY_BASIC_INFORMATION mbi;
@@ -194,7 +208,8 @@ namespace Memory {
                         return T{};
                     }
 
-                    WriteProcessMemory(handle, reinterpret_cast<LPBYTE*>(addToWrite), &valToWrite, sizeof(valToWrite), nullptr);
+                    WriteProcessMemory(handle, reinterpret_cast<LPBYTE *>(addToWrite), &valToWrite, sizeof(valToWrite),
+                                       nullptr);
 
                     DWORD dwOldProtect;
                     VirtualProtectEx(handle, mbi.BaseAddress, mbi.RegionSize, mbi.Protect, &dwOldProtect);
@@ -203,25 +218,27 @@ namespace Memory {
 
             }
 
-            WriteProcessMemory(handle, reinterpret_cast<LPBYTE*>(addToWrite), &valToWrite, sizeof(valToWrite), nullptr);
+            WriteProcessMemory(handle, reinterpret_cast<LPBYTE *>(addToWrite), &valToWrite, sizeof(valToWrite),
+                               nullptr);
             return valToWrite;
         }
 
-        [[deprecated("use read function with std::string/const char* template argument")]] [[nodiscard]] std::string readString(const uintptr_t addToBeRead, std::size_t size = 0) noexcept;
+        [[deprecated("use read function with std::string/const char* template argument")]] [[nodiscard]] std::string
+        readString(const uintptr_t addToBeRead, std::size_t size = 0) noexcept;
 
         /**@brief returns process id of the target process*/
         [[nodiscard]] DWORD getProcessID(void) noexcept;
 
         /**@brief returns the module base address of \p modName (example: "client.dll")*/
-        [[nodiscard]] Address getModule(const char* modName) noexcept;
+        [[nodiscard]] Address getModule(const char *modName) noexcept;
 
         /**@brief returns the dynamic pointer from base pointer \p basePrt and \p offsets*/
-        [[nodiscard]] Address getAddress(const uintptr_t basePrt, const std::vector<uintptr_t>& offsets) noexcept;
+        [[nodiscard]] Address getAddress(const uintptr_t basePrt, const std::vector<uintptr_t> &offsets) noexcept;
 
         /**@brief returns the dynamic pointer from base pointer \p basePrt and \p offsets*/
-        [[nodiscard]] Address getAddress(const Address& basePrt, const std::vector<uintptr_t>& offsets) noexcept;
+        [[nodiscard]] Address getAddress(const Address &basePrt, const std::vector<uintptr_t> &offsets) noexcept;
 
-        [[nodiscard]] bool memoryCompare(const BYTE* bData, const std::vector<int>& signature) noexcept;
+        [[nodiscard]] bool memoryCompare(const BYTE *bData, const std::vector<int> &signature) noexcept;
 
         /**
         @brief a basic signature scanner
@@ -229,8 +246,10 @@ namespace Memory {
         @param sig Signature to search, for example: "? 39 05 F0 A2 F6 FF" where "?" (-1) is a wildcard.
         @param size Size of the area to search within.
         */
-        [[nodiscard]] Address findSignature(const uintptr_t start, const char* sig, const size_t size) noexcept;
-        [[nodiscard]] Address findSignature(const Address& start, const char* sig, const size_t size) noexcept;
+        [[nodiscard]] Address findSignature(const uintptr_t start, const char *sig, const size_t size) noexcept;
+
+        [[nodiscard]] Address findSignature(const Address &start, const char *sig, const size_t size) noexcept;
+
     private:
         /** @brief handle of the target process */
         HANDLE handle = nullptr;
@@ -245,21 +264,20 @@ namespace Memory {
         @param proc Name of the target process ("target.exe")
         @param access Desired access right to the process
         @returns whether or not initialization was successful*/
-        bool init(const char* proc, const DWORD access = PROCESS_ALL_ACCESS) noexcept;
+        bool init(const char *proc, const DWORD access = PROCESS_ALL_ACCESS) noexcept;
 
     };
 }
 
 namespace Memory {
-    namespace Internal
-    {
+    namespace Internal {
         /**
         @brief reads a value from memory
         @param addToBeRead address from which the value will be read.
         @param memoryCheck flag if true memory protection will be checked/changed before reading.
         */
-        template <typename T>
-        [[nodiscard]] T read(const Address& addToBeRead, const bool memoryCheck = false) noexcept {
+        template<typename T>
+        [[nodiscard]] T read(const Address &addToBeRead, const bool memoryCheck = false) noexcept {
             const uintptr_t address = addToBeRead.get();
 
             if (memoryCheck) {
@@ -276,10 +294,10 @@ namespace Memory {
                     }
 
 #ifdef CPP17GRT
-                    if constexpr (is_any_type<T, const char*, std::string, char*>()) {
+                    if constexpr (is_any_type<T, const char *, std::string, char *>()) {
                         constexpr const std::size_t size = 200;
                         char chars[size] = "";
-                        memcpy(chars, reinterpret_cast<char*>(address), size);
+                        memcpy(chars, reinterpret_cast<char *>(address), size);
 
                         int sizeString = sizeof(chars) / sizeof(char);
                         const std::string name = convertToString(chars, sizeString);
@@ -290,7 +308,7 @@ namespace Memory {
                     }
 #endif
 
-                    T returnValue = *reinterpret_cast<T*>(address);
+                    T returnValue = *reinterpret_cast<T *>(address);
 
                     DWORD dwOldProtect;
                     VirtualProtect(mbi.BaseAddress, mbi.RegionSize, mbi.Protect, &dwOldProtect);
@@ -299,10 +317,10 @@ namespace Memory {
             }
 
 #ifdef CPP17GRT
-            if constexpr (is_any_type<T, const char*, std::string, char*>()) {
+            if constexpr (is_any_type<T, const char *, std::string, char *>()) {
                 constexpr const std::size_t size = 200;
                 char chars[size] = "";
-                memcpy(chars,reinterpret_cast<char*>(address),size);
+                memcpy(chars, reinterpret_cast<char *>(address), size);
 
                 int sizeString = sizeof(chars) / sizeof(char);
                 const std::string name = convertToString(chars, sizeString);
@@ -311,7 +329,7 @@ namespace Memory {
             }
 #endif
 
-            return *reinterpret_cast<T*>(address);
+            return *reinterpret_cast<T *>(address);
         }
 
         /**
@@ -336,27 +354,27 @@ namespace Memory {
                             return;
                         }
 
-                        *reinterpret_cast<T*>(address) = value;
+                        *reinterpret_cast<T *>(address) = value;
 
                         DWORD dwOldProtect;
                         VirtualProtect(mbi.BaseAddress, mbi.RegionSize, mbi.Protect, &dwOldProtect);
                         return;
                     }
                 }
-                *reinterpret_cast<T*>(address) = value;
+                *reinterpret_cast<T *>(address) = value;
             } catch (...) {
                 return;
             }
         }
 
         /**@brief returns the module base address of \p modName (example: "client.dll")*/
-        [[nodiscard]] Address getModule(const char* modName) noexcept;
+        [[nodiscard]] Address getModule(const char *modName) noexcept;
 
         /**@brief returns the dynamic pointer from base pointer \p basePrt and \p offsets*/
-        [[nodiscard]] Address getAddress(const uintptr_t basePrt, const std::vector<uintptr_t>& offsets) noexcept;
+        [[nodiscard]] Address getAddress(const uintptr_t basePrt, const std::vector<uintptr_t> &offsets) noexcept;
 
         /**@brief returns the dynamic pointer from base pointer \p basePrt and \p offsets*/
-        [[nodiscard]] Address getAddress(const Address& basePrt, const std::vector<uintptr_t>& offsets) noexcept;
+        [[nodiscard]] Address getAddress(const Address &basePrt, const std::vector<uintptr_t> &offsets) noexcept;
 
         /**
         @brief a basic signature scanner
@@ -364,8 +382,9 @@ namespace Memory {
         @param sig Signature to search, for example: "? 39 05 F0 A2 F6 FF" where "?" (-1) is a wildcard.
         @param size Size of the area to search within.
         */
-        [[nodiscard]] Address findSignature(const uintptr_t start, const char* sig, const size_t size = 0) noexcept;
-        [[nodiscard]] Address findSignature(const Address& modAddr, const char* sig, const size_t size = 0) noexcept;
+        [[nodiscard]] Address findSignature(const uintptr_t start, const char *sig, const size_t size = 0) noexcept;
+
+        [[nodiscard]] Address findSignature(const Address &modAddr, const char *sig, const size_t size = 0) noexcept;
 
         /**
         DO NOT IGNORE: YOU ALWAYS HAVE TO USE THIS FUNCTION (findModuleSignature) WHEN SCANNING FOR SIGNATURES,
@@ -374,7 +393,7 @@ namespace Memory {
         @param mod name of the module ("client.dll")
         @param sig Signature to search, for example: "? 39 05 F0 A2 F6 FF" where "?" (-1) is a wildcard.
         */
-        [[nodiscard]] Address findModuleSignature(const char* mod, const char* sig) noexcept;
+        [[nodiscard]] Address findModuleSignature(const char *mod, const char *sig) noexcept;
 
         /**
          @brief gets a virtual function via vtable index, don't use this, use callVirtualFunction,
@@ -383,8 +402,8 @@ namespace Memory {
          @param index index in vtable
          */
         template<typename T>
-        [[nodiscard]] T getVirtualFunction(const void* baseClass, const uint32_t index) noexcept {
-            return (*static_cast<T**>(baseClass))[index];
+        [[nodiscard]] T getVirtualFunction(const void *baseClass, const uint32_t index) noexcept {
+            return (*static_cast<T **>(baseClass))[index];
         }
 
         /**
@@ -394,8 +413,10 @@ namespace Memory {
         @param args the function's parameters
         */
         template<typename T, typename... Args>
-        T callVirtualFunction(const void* baseClass, const uint32_t index, Args&&... args) noexcept {
-            return getVirtualFunction<T(__thiscall*)(void*, Args&&...)>(baseClass, index)(baseClass, std::forward<Args>(args)...);
+        T callVirtualFunction(const void *baseClass, const uint32_t index, Args &&... args) noexcept {
+            return getVirtualFunction<T(__thiscall *)(void *, Args &&...)>(baseClass, index)(baseClass,
+                                                                                             std::forward<Args>(
+                                                                                                     args)...);
         }
 
     }

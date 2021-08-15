@@ -1,3 +1,3 @@
 #include "Porium.h"
 
-uintptr_t Porium::moduleBase = (uintptr_t)GetModuleHandle(nullptr);
+[[maybe_unused]] uintptr_t Porium::moduleBase = (uintptr_t) GetModuleHandle(nullptr);

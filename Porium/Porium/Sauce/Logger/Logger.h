@@ -1,8 +1,10 @@
 #pragma once
+
 #include "../Vendor.h"
-class Logger
-{
+
+class Logger {
 public:
-	static void log(std::string log);
-	static void logStr(std::string str, UINT64 num);
+    static void log(const std::string &log);
+
+    [[maybe_unused]] static void logStr(const std::string &str, UINT64 num);
 };
