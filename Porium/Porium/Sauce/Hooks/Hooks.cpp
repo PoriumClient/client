@@ -19,7 +19,7 @@ int Hooks::KeyCallback(UINT64 WinKey, bool isDown) {
 	return original(WinKey, isDown);
 }
 
-void Hooks::HookKeys() {
+DWORD __fastcall Hooks::HookKeys() {
 	uintptr_t KeySig = Utils::FindSignature("89 ?? ?? ?? 57 48 83 ?? ?? 8B 05 ?? ?? ?? ?? 8B");
 	Logger::log("Minhook initialized.");
 	if (MH_CreateHook((void*)KeySig, &KeyCallback, reinterpret_cast<LPVOID*>(&original)) == MH_OK) {

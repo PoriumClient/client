@@ -9,7 +9,7 @@ class Hooks
 {
 public:
 	static int KeyCallback(uint64_t WinKey, bool isDown);
-	static void HookKeys();
+	static DWORD __fastcall HookKeys();
 	static void KeyPressed(UINT64 key);
 	static void KeyReleased(UINT64 key);
 	static void UninstallHooks();
