@@ -1,0 +1,3 @@
+[submodule "Porium/Porium/Sauce/Lib/minhook"]
+	path = Porium/Porium/Sauce/Lib/minhook
+	url = https://github.com/TsudaKageyu/minhook

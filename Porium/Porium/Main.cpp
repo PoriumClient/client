@@ -1,16 +1,14 @@
 #include <Windows.h>
-#include "Sauce/Logger/Logger.h"
-#include "Sauce/Porium.h"
 #include "Sauce/Module/ModuleMgr.h"
 #include "Sauce/Hooks/Hooks.h"
 #include <MinHook.h>
 
-void Tooka()
+[[noreturn]] void Tooka()
 {
 	if (MH_Initialize() == MH_OK) {
 		ModuleMgr::initMods();
 		Hooks::HookKeys();
-		while (1) {
+		while (true) {
 			ModuleMgr::tickMods();
 		}
 	}

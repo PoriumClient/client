@@ -14,7 +14,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <dbghelp.h> // ImageNtHeader
+#include <DbgHelp.h> // ImageNtHeader
 #include <cstdint>
 
 #pragma comment(lib, "dbghelp.lib")
